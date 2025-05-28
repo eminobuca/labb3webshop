@@ -1,0 +1,21 @@
+<h1>Välkommen!</h1>
+
+<!-- Registrera -->
+<a href="/register">Registrera ny kund</a><br><br>
+<p th:if="${param.success}" style="color:green;">Du är nu registrerad! Logga in nedan.</p>
+<p th:if="${param.error}" style="color:red;">Fel användarnamn eller lösenord!</p>
+
+<!-- Login-formulär -->
+<h2>Logga in</h2>
+<form action="/login" method="post">
+    <label for="username">Användarnamn:</label>
+    <input type="text" id="username" name="username"><br>
+
+    <label for="password">Lösenord:</label>
+    <input type="password" id="password" name="password"><br>
+
+    <button type="submit">Logga in</button>
+</form>
+
+</body>
+</html>

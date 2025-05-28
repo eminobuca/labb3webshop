@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Expedierade ordrar</title>
+</head>
+<body>
+<h2>Expedierade ordrar</h2>
+
+<table border="1">
+    <tr>
+    <th>Order ID</th>
+    <th>Kund</th>
+    <th>Produkter</th>
+    <th>Totalt (kr)</th>
+    </tr>
+
+    <tr th:each="order : ${orders}">
+    <td th:text="${order.id}"></td>
+    <td th:text="${order.username}"></td>
+    <td>
+    <ul>
+    <li th:each="item : ${order.items}">
+    <span th:text="${item.product.name}">Produkt</span> x
+    span th:text="${item.quantity}">Antal</span> –
+    <span th:text="${item.product.price}">Pris</span> kr
+    </li>
+    </ul>
+    </td>
+    <td><span th:text="${order.formattedTotal}"></span></td>
+    </tr>
+</table>
+
+<hr>
+<p style="text-align: center; margin-top: 20px;">
+    <a href="/admin/orders">Tillbaka till oexpedierade ordrar</a> |
+    <a href="/admin/products">Hantera produkter</a> |
+    <a href="/logout">Logga ut</a>
+</p>
+
+</body>
+</html>

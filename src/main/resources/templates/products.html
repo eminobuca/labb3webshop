@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Produktlista</title>
+</head>
+<body>
+<h1>Alla produkter</h1>
+
+<form action="/products" method="get">
+    <input type="text" name="search" placeholder="Sök produkter..." />
+    <button type="submit">Sök</button>
+</form>
+
+<ul>
+    <li th:each="product : ${products}">
+        <strong th:text="${product.name}">Produktnamn</strong> –
+        <span th:text="${product.price}">Pris</span> kr<br>
+        <em th:text="${product.description}">Beskrivning</em><br>
+        <small>Lager: <span th:text="${product.stock}"></span></small>
+        <a th:href="@{/add-to-cart/{id}(id=${product.id})}">Lägg till i varukorgen</a>
+        <hr>
+    </li>
+</ul>
+
+<p><a href="/cart">Visa varukorgen</a></p>
+</body>
+
+</html>

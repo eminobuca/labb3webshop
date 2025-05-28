@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oexpedierade ordrar</title>
+</head>
+<body>
+<h1>Oexpedierade ordrar</h1>
+
+<table border="1">
+    <tr>
+        <th>Order ID</th>
+        <th>Kund</th>
+        <th>Produkter</th>
+        <th>Totalt (kr)</th>
+        <th>Åtgärd</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}">Order ID</td>
+        <td th:text="${order.username}">Kundnamn</td>
+        <td>
+            <ul>
+                <li th:each="item : ${order.items}">
+                    <span th:text="${item.product.name}">Produkt</span> ×
+                    <span th:text="${item.quantity}">Antal</span> –
+                    <span th:text="${item.product.price}">Pris</span> kr
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span th:text="${order.formattedTotal}"></span>
+        </td>
+        <td>
+            <form th:action="@{'/admin/orders/' + ${order.id} + '/ship'}" method="post">
+                <button type="submit">Markera som expedierad</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<hr>
+<p>
+    <a href="/admin/products">Hantera produkter</a> |
+    <a href="/admin/shippedorders">Visa expedierade ordrar</a> |
+    <a href="/logout">Logga ut</a>
+</p>
+</body>
+</html>
