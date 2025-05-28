@@ -1,6 +1,8 @@
 package com.example.labb3webshopemin.service;
 
-import com.example.labb3webshopemin.model.*;
+import com.example.labb3webshopemin.model.CartItem;
+import com.example.labb3webshopemin.model.Order;
+import com.example.labb3webshopemin.model.OrderItem;
 import com.example.labb3webshopemin.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +34,11 @@ public class OrderService {
     }
 
     public List<Order> getUnshippedOrders() {
-        return orderRepository.findByShipped(false);
+        return orderRepository.findByShippedFalse();
+    }
+
+    public List<Order> getShippedOrders() {
+        return orderRepository.findByShippedTrue();
     }
 
     public void markAsShipped(Long id) {
@@ -40,5 +46,4 @@ public class OrderService {
         order.setShipped(true);
         orderRepository.save(order);
     }
-
 }

@@ -6,7 +6,6 @@
 </head>
 <body>
 <h2>Expedierade ordrar</h2>
-
 <table border="1">
     <tr>
     <th>Order ID</th>
@@ -14,29 +13,26 @@
     <th>Produkter</th>
     <th>Totalt (kr)</th>
     </tr>
-
     <tr th:each="order : ${orders}">
     <td th:text="${order.id}"></td>
     <td th:text="${order.username}"></td>
     <td>
     <ul>
     <li th:each="item : ${order.items}">
-    <span th:text="${item.product.name}">Produkt</span> x
-    span th:text="${item.quantity}">Antal</span> –
-    <span th:text="${item.product.price}">Pris</span> kr
+    <span th:text="${item.product.name}"></span>
+    x <span th:text="${item.quantity}"></span> –
+    <span th:text="${item.product.price} + ' kr'"></span>
     </li>
     </ul>
     </td>
-    <td><span th:text="${order.formattedTotal}"></span></td>
+    <td th:text="${order.formattedTotal}"></td>
     </tr>
 </table>
 
-<hr>
-<p style="text-align: center; margin-top: 20px;">
+<p>
     <a href="/admin/orders">Tillbaka till oexpedierade ordrar</a> |
     <a href="/admin/products">Hantera produkter</a> |
     <a href="/logout">Logga ut</a>
 </p>
-
 </body>
 </html>
