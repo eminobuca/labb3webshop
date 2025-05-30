@@ -15,18 +15,21 @@
     <th>Delsumma</th>
     <th>Åtgärder</th>
   </tr>
+  <!-- Loopar igenom varukorgens artiklar -->
   <tr th:each="item : ${cartItems}">
     <td th:text="${item.product.name}">Produktnamn</td>
     <td th:text="${item.quantity}">Antal</td>
     <td th:text="${item.product.price} + ' kr'">Pris</td>
     <td th:text="${item.product.price * item.quantity} + ' kr'">Delsumma</td>
     <td>
+      <!-- Formulär för att uppdatera antal -->
       <form th:action="@{/cart/update}" method="post" style="display:inline;">
         <input type="hidden" name="productId" th:value="${item.product.id}" />
         <input type="number" name="quantity" th:value="${item.quantity}" min="1" />
         <button type="submit">Uppdatera</button>
       </form>
 
+      <!-- Formulär för att ta bort produkt -->
       <form th:action="@{/cart/remove}" method="post" style="display:inline;">
         <input type="hidden" name="productId" th:value="${item.product.id}" />
         <button type="submit">Ta bort</button>
@@ -35,8 +38,10 @@
   </tr>
 </table>
 
+<!-- Visar totala priset -->
 <h3>Totalt pris: <span th:text="${total} + ' kr'">0 kr</span></h3>
 
+<!-- Knapp för att gå vidare till checkout -->
 <form th:action="@{/checkout}" method="get">
   <button type="submit">Slutför köp</button>
 </form>

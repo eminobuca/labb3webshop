@@ -7,6 +7,7 @@
 <body>
 <h1>Registrera dig</h1>
 
+<!-- Formulär för registrering -->
 <form action="/register" method="post">
     <label for="username">Användarnamn:</label>
     <input type="text" id="username" name="username" required><br>
@@ -17,7 +18,9 @@
     <button type="submit">Registrera</button>
 </form>
 
+<!-- Felmeddelande om användarnamn redan finns -->
 <p th:if="${error}" style="color:red;">Användarnamnet finns redan!</p>
+
 <p><a href="/">Tillbaka till login</a></p>
 </body>
 </html>

@@ -5,6 +5,8 @@
     <title>Admin Produkter</title>
 </head>
 <body>
+
+<!-- Navigering för admin -->
 <nav>
     <a href="/admin/products">Hantera produkter</a> |
     <a href="/admin/orders">Oexpedierade ordrar</a> |
@@ -16,6 +18,7 @@
 <h1>Hantera Produkter</h1>
 
 <h2>Alla produkter</h2>
+<!-- Lista alla produkter -->
 <ul>
     <li th:each="product : ${products}">
         <span th:text="${product.name}">Produktnamn</span> -
@@ -24,6 +27,7 @@
 </ul>
 
 <h2>Lägg till ny produkt</h2>
+<!-- Formulär för att lägga till ny produkt -->
 <form th:action="@{/admin/products}" method="post" th:object="${newProduct}">
     <label for="name">Namn:</label>
     <input type="text" id="name" th:field="*{name}" /><br/>

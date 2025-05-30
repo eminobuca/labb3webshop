@@ -6,29 +6,33 @@
 </head>
 <body>
 <h2>Expedierade ordrar</h2>
+
+<!-- Tabell med alla expedierade ordrar -->
 <table border="1">
     <tr>
-    <th>Order ID</th>
-    <th>Kund</th>
-    <th>Produkter</th>
-    <th>Totalt (kr)</th>
+        <th>Order ID</th>
+        <th>Kund</th>
+        <th>Produkter</th>
+        <th>Totalt (kr)</th>
     </tr>
     <tr th:each="order : ${orders}">
-    <td th:text="${order.id}"></td>
-    <td th:text="${order.username}"></td>
-    <td>
-    <ul>
-    <li th:each="item : ${order.items}">
-    <span th:text="${item.product.name}"></span>
-    x <span th:text="${item.quantity}"></span> –
-    <span th:text="${item.product.price} + ' kr'"></span>
-    </li>
-    </ul>
-    </td>
-    <td th:text="${order.formattedTotal}"></td>
+        <td th:text="${order.id}"></td> <!-- Ordernummer -->
+        <td th:text="${order.username}"></td> <!-- Kundnamn -->
+        <td>
+            <ul>
+                <!-- Produkter i ordern -->
+                <li th:each="item : ${order.items}">
+                    <span th:text="${item.product.name}"></span>
+                    x <span th:text="${item.quantity}"></span> –
+                    <span th:text="${item.product.price} + ' kr'"></span>
+                </li>
+            </ul>
+        </td>
+        <td th:text="${order.formattedTotal}"></td> <!-- Totalt pris -->
     </tr>
 </table>
 
+<!-- Navigationslänkar -->
 <p>
     <a href="/admin/orders">Tillbaka till oexpedierade ordrar</a> |
     <a href="/admin/products">Hantera produkter</a> |

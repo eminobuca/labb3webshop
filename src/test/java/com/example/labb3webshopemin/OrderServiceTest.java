@@ -21,36 +21,36 @@ public class OrderServiceTest {
 
     @Test
     public void testMarkAsShipped() {
-        // Skapa ny testorder
+        // Skapa en ny order med användarnamn och "inte expedierad"-status
         Order order = new Order();
         order.setUsername("testuser");
         order.setShipped(false);
 
-        // Spara i testdatabasen
+        // Spara ordern i testdatabasen (för att kunna testa på riktigt)
         orderRepository.save(order);
 
-        // Markera som expedierad
+        // Anropa funktionen för att markera ordern som expedierad
         orderService.markAsShipped(order.getId());
 
-        // Hämta uppdaterad order
+        // Hämta den uppdaterade ordern från databasen
         Order updatedOrder = orderRepository.findById(order.getId()).orElseThrow();
 
-        // Kontrollera att den är expedierad
+        // Kontrollera att ordern nu är markerad som expedierad (true)
         Assertions.assertTrue(updatedOrder.isShipped());
     }
 
     @Test
     public void testGetAllOrders() {
-        // Skapa och spara en testorder
+        // Skapa och spara en testorder för att säkerställa att databasen inte är tom
         Order order = new Order();
         order.setUsername("testuser2");
         order.setShipped(false);
         orderRepository.save(order);
 
-        // Hämta alla ordrar
+        // Hämta alla ordrar från tjänsten
         List<Order> orders = orderService.getAllOrders();
 
-        // Kontrollera att det finns minst en order
+        // Kontrollera att minst en order finns i listan (dvs att metoden fungerar)
         Assertions.assertFalse(orders.isEmpty());
     }
 }

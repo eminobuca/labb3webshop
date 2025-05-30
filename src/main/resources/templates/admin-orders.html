@@ -7,6 +7,7 @@
 <body>
 <h1>Oexpedierade ordrar</h1>
 
+<!-- Tabell med alla ordrar som inte är expedierade -->
 <table border="1">
     <tr>
         <th>Order ID</th>
@@ -15,11 +16,13 @@
         <th>Totalt (kr)</th>
         <th>Åtgärd</th>
     </tr>
+    <!-- Loopar igenom alla ordrar -->
     <tr th:each="order : ${orders}">
-        <td th:text="${order.id}">Order ID</td>
-        <td th:text="${order.username}">Kundnamn</td>
+        <td th:text="${order.id}">Order ID</td> <!-- Visar ordernummer -->
+        <td th:text="${order.username}">Kundnamn</td> <!-- Visar vem som beställt -->
         <td>
             <ul>
+                <!-- Loopar igenom produkter i ordern -->
                 <li th:each="item : ${order.items}">
                     <span th:text="${item.product.name}">Produkt</span> ×
                     <span th:text="${item.quantity}">Antal</span> –
@@ -28,16 +31,21 @@
             </ul>
         </td>
         <td>
+            <!-- Visar totalt pris för ordern -->
             <span th:text="${order.formattedTotal}"></span>
         </td>
         <td>
+            <!-- Knapp för att markera ordern som expedierad -->
             <form th:action="@{'/admin/orders/' + ${order.id} + '/ship'}" method="post">
                 <button type="submit">Markera som expedierad</button>
             </form>
         </td>
     </tr>
 </table>
+
 <hr>
+
+<!-- Navigationslänkar -->
 <p>
     <a href="/admin/products">Hantera produkter</a> |
     <a href="/admin/shippedorders">Visa expedierade ordrar</a> |

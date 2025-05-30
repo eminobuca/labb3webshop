@@ -7,6 +7,7 @@
 <body>
 <h1 th:text="'Tack för ditt köp, ' + ${username} + '!'">Tack för ditt köp!</h1>
 
+<!-- Visar totalt att betala -->
 <p><strong>Totalt att betala: </strong>
     <span th:text="${#numbers.formatDecimal(total, 0, 'POINT', 2, 'COMMA')}">0.00</span> kr
 </p>
@@ -14,6 +15,7 @@
 <p>Du har beställt följande produkter:</p>
 
 <ul>
+    <!-- Loopar igenom produkterna i ordern -->
     <li th:each="item : ${order.items}">
         <span th:text="${item.product.name}">Produkt</span> ×
         <span th:text="${item.quantity}">Antal</span> –
