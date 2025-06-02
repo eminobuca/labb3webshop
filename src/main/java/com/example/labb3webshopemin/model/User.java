@@ -1,25 +1,47 @@
-package com.example.labb3webshopemin.model;
+import jakarta.persistence.*;
 
-// Representerar en användare i systemet, med användarnamn, lösenord och roll
+@Entity
+@Table(name = "users")  // Namnet på tabellen i databasen
 public class User {
-    private String username;    // Användarnamn, unikt för varje användare
-    private String password;    // Lösenordet sparas som text här, men i en riktig app bör det alltid krypteras (hashas) för säkerhetens skull.
-    private String role;        // Roll, t.ex. "customer" eller "admin"
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;  // Primärnyckel
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    // Fler fält som t.ex. email, roll, etc, kan läggas till här
+
+    // Konstruktorer, getters och setters
 
     public User() {}
 
-    // Konstruktor med fält
-    public User(String username, String password, String role) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.role = role;
     }
 
-    // Getters för fälten
-    public String getUsername() { return username; }
-    public String getPassword() { return password; }
-    public String getRole() { return role; }
+    public Long getId() {
+        return id;
+    }
 
-    // Setter för fälten
-    public void setUsername(String username) { this.username = username; }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
